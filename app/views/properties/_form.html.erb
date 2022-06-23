@@ -37,7 +37,8 @@
   </div>
 
 
-  <%= form.fields_for :station do |station_form| %>
+  <%= form.fields_for :stations do |station_form| %>
+  <h2>最寄り駅<%= station_form.index+1 %></h2>
     <div class="field">
       <%= station_form.label :路線名 %>
       <%= station_form.text_field :route_name %>
