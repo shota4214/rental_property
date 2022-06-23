@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: %i[ show edit update destroy ]
+  # before_action :set_property, only: %i[ show edit update destroy ]
 
   # GET /properties or /properties.json
   def index
@@ -8,29 +8,27 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1 or /properties/1.json
   def show
+    @station = @property.station
   end
 
   # GET /properties/new
   def new
     @property = Property.new
+    @property.stations.build
   end
 
   # GET /properties/1/edit
   def edit
+    @station = @property.station
   end
 
   # POST /properties or /properties.json
   def create
     @property = Property.new(property_params)
-
-    respond_to do |format|
       if @property.save
-        format.html { redirect_to @property, notice: "Property was successfully created." }
-        format.json { render :show, status: :created, location: @property }
+        redirect_to properties_path, notice:"物件を登録しました"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
+        render :new
     end
   end
 
@@ -64,6 +62,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :rent, :address, :age, :note)
+      params.require(:property).permit(:name, :rent, :address, :age, :note, station_attributes: [:route_name, :station_name, :minutes_on_foot])
     end
 end

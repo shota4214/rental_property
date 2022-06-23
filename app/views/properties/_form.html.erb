@@ -36,9 +36,24 @@
     <%= form.text_area :note %>
   </div>
 
+
+  <%= form.fields_for :station do |station_form| %>
+    <div class="field">
+      <%= station_form.label :路線名 %>
+      <%= station_form.text_field :route_name %>
+    </div>
+
+    <div class="field">
+      <%= station_form.label :駅名 %>
+      <%= station_form.text_field :station_name %>
+    </div>
+
+    <div class="field">
+      <%= station_form.label :徒歩分数 %>
+      <%= station_form.number_field :minutes_on_foot %>分
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit "登録する"%>
   </div>
 <% end %>
-
-
