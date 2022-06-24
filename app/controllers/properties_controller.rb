@@ -8,7 +8,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1 or /properties/1.json
   def show
-    @stations = @property.stations.build
+    @stations = @property.stations
   end
 
   # GET /properties/new
